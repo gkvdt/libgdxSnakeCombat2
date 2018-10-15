@@ -29,7 +29,7 @@ public class TesterScreen implements Screen{
     public TesterScreen(ScreenLoader screenLoader){
         this.screenLoader = screenLoader;
         batch = new SpriteBatch();
-        snake = new Snake();
+        snake = new Snake(this);
         shapeRenderer = new ShapeRenderer();
 
         buttons = new Buttons(snake);
@@ -107,5 +107,10 @@ public class TesterScreen implements Screen{
     @Override
     public void dispose() {
 
+    }
+
+
+    public Food getFood() {
+        return food;
     }
 }

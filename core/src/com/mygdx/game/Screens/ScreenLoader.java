@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.mygdx.game.Components.Camera;
+import com.mygdx.game.Components.newSnake.Setting;
 
 import java.util.Stack;
 
@@ -11,6 +12,7 @@ public class ScreenLoader extends Game {
 
     private Stack<Screen> screens;
     public Camera camera;
+    private Setting setting;
 
     @Override
     public void create() {

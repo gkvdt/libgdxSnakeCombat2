@@ -2,6 +2,7 @@ package com.mygdx.game.Components.newSnake;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Screens.TesterScreen;
 
 import java.util.LinkedList;
 
@@ -12,10 +13,11 @@ public class Snake  {
     private boolean isStroke;
     private ScreenSize size;
     private int[][] pozition;
-    LinkedList<SnakeStep> nextStep;
+    private LinkedList<SnakeStep> nextStep;
+    private TesterScreen renderScreen;
 
-    public Snake(){
-
+    public Snake(TesterScreen renderScreen){
+        this.renderScreen = renderScreen;
         init();
         define();
         initSnake();
@@ -23,6 +25,7 @@ public class Snake  {
 
     private void init() {
         size = new ScreenSize();
+
     }
 
     private void define() {
@@ -73,7 +76,7 @@ public class Snake  {
         if (!isStroke){
 //            bu if bloğunda yılanın hızı ayarlanacak
             if (Fps<fpsBuffer){
-                updateSnake();
+                updateSnake(delta);
                 fpsBuffer=0f;
             }else {
                 fpsBuffer+=delta;
@@ -83,12 +86,22 @@ public class Snake  {
 
     }
 
-    private void updateSnake() {
+    private void updateSnake(float delta) {
         move();
-//        eat();
+        eat(delta);
 //        stroke();
 //        todo update fonksyonları yazılmadı
 
+    }
+
+    private void eat(float delta) {
+        if (renderScreen.getFood().getPozition()[0]==pozition[0][0] &&
+                renderScreen.getFood().getPozition()[1]==pozition[0][1]){
+//            yem yenirse olaacaklar
+            length++;
+            renderScreen.getFood().getNewFood();
+            SpeedUp(delta);
+        }
     }
 
     private void move() {
@@ -109,6 +122,7 @@ public class Snake  {
 
     }
 
+//    duvardan geçme fonksyonu
     private void moveToWall() {
         //sağdan geçiş
         if (pozition[0][0] > (size.getRightButtonStart() - size.getRectSize())) {
@@ -128,6 +142,8 @@ public class Snake  {
         }
     }
 
+
+//    dokunuşları alıyor
     private void rotate() {
         x=nextStep.getFirst().getX();
         y=nextStep.getFirst().getY();
@@ -144,10 +160,13 @@ public class Snake  {
         return nextStep.getFirst();
     }
 
+//    todo zamanla hız artması
     private void SpeedUp(float delta){
-        Fps-=3*delta;
+        if (Fps>maxFps)
+        Fps-=delta/3;
     }
 
+//    rotayı linkedliste atan fonksyon
     public void CreateRota(int x,int y){
         int xBuf = stepSize*x;
         int yBuf = stepSize*y;

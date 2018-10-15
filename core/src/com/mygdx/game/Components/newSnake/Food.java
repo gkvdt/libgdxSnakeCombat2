@@ -47,4 +47,7 @@ public class Food{
         shapeRenderer.end();
     }
 
+    public int[] getPozition() {
+        return pozition;
+    }
 }
