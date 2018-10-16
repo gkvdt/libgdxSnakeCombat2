@@ -20,9 +20,10 @@ public class ScreenLoader extends Game {
 
         screens = new Stack<Screen>();
 
-        addSceen(new TesterScreen(this));
+        setting = new Setting();
+        //addSceen(new TesterScreen(this));
 
-        //addSceen(new MenuScreen(this));
+        addSceen(new MenuScreen(this));
         loadScreen();
 
         camera = new Camera
@@ -53,5 +54,10 @@ public class ScreenLoader extends Game {
 
     public Stack<Screen> getScreens() {
         return screens;
+    }
+
+
+    public Setting getSetting() {
+        return setting;
     }
 }

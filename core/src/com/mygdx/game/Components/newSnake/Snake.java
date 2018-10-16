@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class Snake  {
 
     private int stepSize,x,y,length;
-    private float Fps,maxFps,fpsBuffer=0f;
+    private float Fps,fpsBuffer=0f;
     private boolean isStroke;
     private ScreenSize size;
     private int[][] pozition;
@@ -30,9 +30,8 @@ public class Snake  {
 
     private void define() {
        stepSize = size.getStepSize();
-       Fps = 0.12f;
-       maxFps = 0.03f;
        isStroke=false;
+       Fps = renderScreen.getLoader().getSetting().getSpeed();
        pozition = new int[240][2];
        length=5;
 
@@ -87,10 +86,13 @@ public class Snake  {
     }
 
     private void updateSnake(float delta) {
-        move();
-        eat(delta);
-//        stroke();
-//        todo update fonksyonları yazılmadı
+
+        if (!isStroke(pozition[0][0],pozition[0][1])) {
+
+            move();
+            eat(delta);
+        }
+//        todo stroke fonksyonları yazılmadı
 
     }
 
@@ -145,6 +147,8 @@ public class Snake  {
 
 //    dokunuşları alıyor
     private void rotate() {
+
+        // TODO: 10/15/18 Bug var çok seri basınca geri gidebiliyor
         x=nextStep.getFirst().getX();
         y=nextStep.getFirst().getY();
         if(nextStep.size()!=1){
@@ -160,9 +164,9 @@ public class Snake  {
         return nextStep.getFirst();
     }
 
-//    todo zamanla hız artması
+
     private void SpeedUp(float delta){
-        if (Fps>maxFps)
+        if (Fps>renderScreen.getLoader().getSetting().getMaxSpeed())
         Fps-=delta/3;
     }
 
@@ -174,5 +178,17 @@ public class Snake  {
         if (nextStep.size()<3) {
             nextStep.addLast(new SnakeStep(xBuf, yBuf));
         }
+    }
+
+    public boolean isStroke(int x,int y){
+        // TODO: 10/15/18 stroke efekti koyacaz 3 kere git gel yapacak yılan sonra menü gelecek
+
+        for(int i = 1;length>i;i++){
+            if(pozition[i][0]==x && pozition[i][1]==y){
+                System.out.printf("storkee!!!!!1");
+                this.isStroke = true;
+            }
+        }
+        return this.isStroke;
     }
 }

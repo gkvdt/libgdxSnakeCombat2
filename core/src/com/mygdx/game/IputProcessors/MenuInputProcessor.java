@@ -10,6 +10,7 @@ import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Screens.ScoreScreen;
 import com.mygdx.game.Screens.ScreenLoader;
 import com.mygdx.game.Screens.SettingScreen;
+import com.mygdx.game.Screens.TesterScreen;
 
 import org.lwjgl.Sys;
 
@@ -48,7 +49,7 @@ public class MenuInputProcessor implements InputProcessor{
         if (textures[0].getRectangle().contains(screenX,screenY)){
             //play
             System.out.print("play");
-            menuScreen.getScreenLoader().addSceen(new MyGdxGame(menuScreen.getScreenLoader()));
+            menuScreen.getScreenLoader().addSceen(new TesterScreen(menuScreen.getScreenLoader()));
             menuScreen.getScreenLoader().loadScreen();
 
         }

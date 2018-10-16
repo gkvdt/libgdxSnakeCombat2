@@ -231,7 +231,6 @@ public class MySnake extends ShapeRenderer implements InputProcessor {
 	public boolean isStrike(int x,int y){
 		for(int i = 1;length>i;i++){
 			if(pozition[i][0]==x && pozition[i][1]==y){
-				System.out.println("asafsdfdasf");
 				isStroke = true;
 			}
 			

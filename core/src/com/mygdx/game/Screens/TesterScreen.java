@@ -2,8 +2,8 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.Components.newSnake.Buttons;
 import com.mygdx.game.Components.newSnake.Food;
+import com.mygdx.game.Components.newSnake.Setting;
 import com.mygdx.game.Components.newSnake.Snake;
 import com.mygdx.game.IputProcessors.TestInputProcessor;
 
@@ -24,6 +25,7 @@ public class TesterScreen implements Screen{
     private Food food;
 
 
+
     BitmapFont font;
 
     public TesterScreen(ScreenLoader screenLoader){
@@ -35,11 +37,14 @@ public class TesterScreen implements Screen{
         buttons = new Buttons(snake);
         food = new Food(snake);
 
+
+
         //--------------
 
         font = new BitmapFont();
         font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         font.getData().setScale(2);
+        font.setColor(Color.YELLOW);
         //--------------
         Gdx.input.setInputProcessor(new TestInputProcessor(this));
 
@@ -73,7 +78,10 @@ public class TesterScreen implements Screen{
         //--------------
 
         batch.begin();
-        font.draw(batch,"asddas",10,50);
+        String score = "Score : ";
+        font.draw(batch,score+(snake.getLength()-5),snake.getSize().getRectSize(),snake.getSize().getWIDTH()-(
+                snake.getSize().getRectSize()*2
+                ));
         batch.end();
         //--------------
 
@@ -113,4 +121,11 @@ public class TesterScreen implements Screen{
     public Food getFood() {
         return food;
     }
+
+    public ScreenLoader getLoader(){
+        return screenLoader;
+
+    }
+
+
 }
