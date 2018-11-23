@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Components.Snake.FastTexture;
 import com.mygdx.game.Components.newSnake.Buttons;
 import com.mygdx.game.Components.newSnake.Food;
 import com.mygdx.game.Components.newSnake.Setting;
@@ -23,6 +24,7 @@ public class TesterScreen implements Screen{
     private ShapeRenderer shapeRenderer;
     private Buttons buttons;
     private Food food;
+    private FastTexture pauseButton;
 
 
 
@@ -36,6 +38,11 @@ public class TesterScreen implements Screen{
 
         buttons = new Buttons(snake);
         food = new Food(snake);
+
+        pauseButton = new FastTexture(snake,"pause.png",
+                snake.getSize().getRigthButtonEnd()-(snake.getSize().getRectSize()*5),
+                snake.getSize().getWIDTH()-(snake.getSize().getRectSize()*5));
+
 
 
 
@@ -74,6 +81,7 @@ public class TesterScreen implements Screen{
 
         food.render(shapeRenderer);
 
+        pauseButton.render(batch);
 
         //--------------
 

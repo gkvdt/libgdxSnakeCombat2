@@ -191,4 +191,8 @@ public class Snake  {
         }
         return this.isStroke;
     }
+
+    public SnakeStep getLastRotate(){
+        return nextStep.getLast();
+    }
 }

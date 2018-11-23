@@ -2,6 +2,7 @@ package com.mygdx.game.Components.newSnake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.Components.Sizes;
 
 public class ScreenSize extends ShapeRenderer {
 
@@ -12,12 +13,13 @@ public class ScreenSize extends ShapeRenderer {
     private int RectSize;
     private int StepSize;
     private int Space;
+    private Sizes sizes;
 
 
     public ScreenSize(){
-
         HEIGHT=(Gdx.graphics.getWidth()/24)*24;
         WIDTH=(Gdx.graphics.getHeight()/24)*24;
+        sizes  = new Sizes(HEIGHT,WIDTH);
 
         LeftButtonStart = 0;
         LeftButtonEnd = (HEIGHT-WIDTH)/2;
@@ -26,6 +28,10 @@ public class ScreenSize extends ShapeRenderer {
         RigthButtonEnd = WIDTH;
         Space =(WIDTH*20)/2400;
         System.out.println("ScreenSize - Width = "+HEIGHT + " Height = "+WIDTH);
+    }
+
+    public Sizes getSizes() {
+        return sizes;
     }
 
     public int getRectSize(){

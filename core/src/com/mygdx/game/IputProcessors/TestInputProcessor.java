@@ -51,7 +51,10 @@ public class TestInputProcessor implements InputProcessor {
                 return true;
             }
         }
-        if(testerScreen.getButtons().getRectRight().contains(screenX,screenY)){
+
+        //ekran pause butonunu almıyor
+        if(testerScreen.getButtons().getRectRight().getX()<screenX &&
+                testerScreen.getSnake().getSize().getRectSize()*6<screenY){
             if (getX()>0 && getY()==0) {
                 testerScreen.getSnake().CreateRota(0,1);
                 return true;
@@ -99,11 +102,14 @@ public class TestInputProcessor implements InputProcessor {
 
 
     private int getX() {
-        return testerScreen.getSnake().getNextStep().getX();
+//        return testerScreen.getSnake().getNextStep().getX();
+        return testerScreen.getSnake().getLastRotate().getX();
     }
 
     private int getY(){
-        return testerScreen.getSnake().getNextStep().getY();
+//        return testerScreen.getSnake().getNextStep().getY();
+        return testerScreen.getSnake().getLastRotate().getY();
+
     }
 
 }
